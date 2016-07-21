@@ -1,0 +1,5 @@
+name: MCraftersPlus
+version: 0.1-alpha
+main: Mcrafters\McraftersPlus\Main
+api: [2.0.0]
+description: An Auto Updater for MCrafters plugins
