@@ -12,11 +12,30 @@
 namespace MCrafters\MCraftersPlus;
 
 use pocketmine\plugin\PluginBase;
+use MCrafters\MCraftersPlus\task\QueryHandler;
 
 class Main extends PluginBase{
   
+  protected $plugins = [
+    "MTeamPvP",
+    "WarnPlayer",
+    "ItemChest",
+    "ServerManager",
+    "opmanager",
+    "MSpleef",
+    "TradePro",
+    "MHelpModifer",
+    "ReportHacker",
+    "MoneyTag",
+    "FlagSpiral",
+    "FlyCommand",
+    "JoinLeaveMessages",
+    "UserGeo"
+    ];
+  
   public function onEnable(){
     $this->getLogger()->info("Enabling MCraftersPlus...");
+    $this->getServer()->getScheduler()->scheduleRepeatingTask(new QueryHandler($this), (30 * 60 *20));
   }
   
   public function onDisable(){
