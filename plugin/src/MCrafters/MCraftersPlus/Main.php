@@ -24,8 +24,8 @@ class Main extends PluginBase{
   }
   
   public function getInput($default = ""){
-		$input = \trim(\fgets(STDIN));
-		return $input === "" ? $default : $input;
-	}
+    $input = \trim(\fgets(STDIN));
+    return $input === "" ? $default : $input;
+  }
   
 }
