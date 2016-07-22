@@ -16,30 +16,23 @@ use MCrafters\MCraftersPlus\task\QueryHandler;
 
 class Main extends PluginBase{
   
-  protected $plugins = [
-    "MTeamPvP",
-    "WarnPlayer",
-    "ItemChest",
-    "ServerManager",
-    "opmanager",
-    "MSpleef",
-    "TradePro",
-    "MHelpModifer",
-    "ReportHacker",
-    "MoneyTag",
-    "FlagSpiral",
-    "FlyCommand",
-    "JoinLeaveMessages",
-    "UserGeo"
-    ];
-  
   public function onEnable(){
     $this->getLogger()->info("Enabling MCraftersPlus...");
-    $this->getServer()->getScheduler()->scheduleRepeatingTask(new QueryHandler($this), (30 * 60 *20));
+    $this->getServer()->getScheduler()->scheduleRepeatingTask(new QueryHandler($this, $this->getMCraftersPlugin()), (30 * 60 *20));
+    $this->getLogger()->info("Successfully enabled!");
   }
   
   public function onDisable(){
     $this->getLogger()->info("Disabling MCraftersPlus...");
+  }
+  
+  public function getMCraftersPlugin(){
+    foreach($this->getServer()->getPluginManager()->getPlugins() as $plugins){
+      $parse = yaml_parse(\pocketmine\utils\Utils::getURL("http://raw.githubusercontent.com/MCrafterss/MCraftersPlus/master/data/info/plugins.yml"));
+      if(($name = array_search($plugins->getDescription()->getName(), $parse))){
+        return $name;
+      }
+    }
   }
   
   public function getInput($default = ""){
