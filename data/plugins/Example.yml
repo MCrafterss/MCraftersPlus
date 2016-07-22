@@ -1,0 +1,3 @@
+#Name of the plugin will be in the file name e.g. MTeamPvP.yml
+version: #Current version of plugin like set in the plugin.yml
+download: #Direct URL to download the plugin version in .phar-format
