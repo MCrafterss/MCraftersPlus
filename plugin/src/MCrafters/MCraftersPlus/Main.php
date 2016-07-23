@@ -12,23 +12,36 @@
 namespace MCrafters\MCraftersPlus;
 
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\Utils;
 use MCrafters\MCraftersPlus\task\QueryHandler;
 
 class Main extends PluginBase{
   
   public function onEnable(){
     $this->getLogger()->info("Enabling MCraftersPlus...");
-    $this->getServer()->getScheduler()->scheduleRepeatingTask(new QueryHandler($this, $this->getMCraftersPlugin()), (30 * 60 *20));
-    $this->getLogger()->info("Successfully enabled!");
+    if($this->connectionTest() === true){
+      $this->getServer()->getScheduler()->scheduleRepeatingTask(new QueryHandler($this, $this->getMCraftersPlugin()), (30 * 60 *20));
+      $this->getLogger()->info("Successfully connected to the server.");
+    }else{
+      $this->getLogger()->info("§cCould not connect to the server! Are you connected to the internet?");
+    }
   }
   
   public function onDisable(){
     $this->getLogger()->info("Disabling MCraftersPlus...");
   }
   
+  public function connectionTest(){
+    if(Utils::getURL("http://raw.githubusercontent.com/MCrafterss/MCraftersPlus/master/data/info/connection.txt", 10) === \false){
+      return false;
+    }else{
+      return true;
+    }
+  }
+  
   public function getMCraftersPlugin(){
     foreach($this->getServer()->getPluginManager()->getPlugins() as $plugins){
-      $parse = yaml_parse(\pocketmine\utils\Utils::getURL("http://raw.githubusercontent.com/MCrafterss/MCraftersPlus/master/data/info/plugins.yml"));
+      $parse = yaml_parse(Utils::getURL("http://raw.githubusercontent.com/MCrafterss/MCraftersPlus/master/data/info/plugins.yml"));
       if(($name = array_search($plugins->getDescription()->getName(), $parse))){
         return $name;
       }
