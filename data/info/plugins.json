@@ -1,4 +1,4 @@
-array(
+{
   "MTeamPvP",
   "WarnPlayer",
   "ItemChest",
@@ -13,4 +13,4 @@ array(
   "FlyCommand",
   "JoinLeaveMessages",
   "UserGeo"
-  );
+}
