@@ -53,4 +53,22 @@ class Main extends PluginBase{
     return $input === "" ? $default : $input;
   }
   
+  /**
+   * This will delete all file(s) and/or folders in $target path.
+   * Use it carefully!
+   */
+  protected function force_delete($target){
+    if(is_dir($target)){
+      $files = glob($target . '*', GLOB_MARK );
+      foreach($files as $file){
+        $this->force_delete($file);
+      }
+      rmdir($target);
+    }elseif(is_file($target)){
+      unlink($target);  
+    }else{
+      return false;
+    }
+  }
+  
 }
