@@ -54,7 +54,7 @@ class Main extends PluginBase{
   
   public function getMCraftersPlugin(){
     foreach($this->getServer()->getPluginManager()->getPlugins() as $plugins){
-      $parse = json_decode(Utils::getURL("http://raw.githubusercontent.com/MCrafterss/MCraftersPlus/master/data/info/plugins.yml", true));
+      $parse = json_decode(Utils::getURL("http://raw.githubusercontent.com/MCrafterss/MCraftersPlus/master/data/info/plugins.json", true));
       if($name = array_search($plugins->getDescription()->getName(), $parse)){
         return $parse[$name];
       }
