@@ -1,12 +1,24 @@
 <?php
 
-/*
+/**
  * __  __  ____            __ _                        
  *|  \/  |/ ___|_ __ __ _ / _| |_ ___ _ __ ___     _   
  *| |\/| | |   | '__/ _` | |_| __/ _ \ '__/ __|  _| |_ 
  *| |  | | |___| | | (_| |  _| ||  __/ |  \__ \ |_   _|
  *|_|  |_|\____|_|  \__,_|_|  \__\___|_|  |___/   |_|  
- *
+ * MCraftersPlus - Get the best experience with MCrafters+
+ * Copyright (C) 2016 MCrafters Team <https://github.com/MCrafterss/MCraftersPlus>
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
 */
 
 namespace MCrafters\MCraftersPlus\task;
@@ -39,6 +51,8 @@ class QueryHandler extends PluginTask{
         $this->plugin->getLogger()->info($this->name . " downloaded. Restarting plugin now...");
         copy($this->plugin->getDataFolder() . "/" . $this->name . ".phar", $this->plugin->getServer()->getDataFolder() . "/plugins/" . $this->name . ".phar");
         unlink($this->plugin->getDataFolder() . "/" . $this->name . ".phar");
+      }else{
+        $this->plugin->getLogger()->warning("Something went wrong! The update couldn't be installed!");
       }
     }
   }
