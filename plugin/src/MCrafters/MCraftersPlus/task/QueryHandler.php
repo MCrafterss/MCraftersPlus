@@ -38,7 +38,7 @@ class QueryHandler extends PluginTask{
   
   public function onRun($currentTick){
     $url = \pocketmine\utils\Utils::getURL("https://github.com/MCrafterss/MCraftersPlus/blob/master/data/plugins/" . $this->name . ".yml");
-    $parse = json_decode($url, true);
+    $parse = yaml_parse($url);
     if($parse["version"] !== ($plugin = $this->plugin->getServer()->getPluginManager()->getPlugin($this->name))->getDescription()->getVersion()){
       $this->plugin->getLogger()->info("\n------------------------\n§1M§9Crafters+ §5Auto Updater§f\nA new version of $name has been released! Do you want to update your current installed version " . $this->plugin->getServer()->getPluginManager()->getPlugin($name)->getDescription()->getVersion() . " to the new " . $parse["version"] . "?\n§7Update description:§f\n" . $parse["description"] . "\n(§ayes§f/§cno§f)");
       if(strtolower($this->plugin->getInput("no")) === "yes") ? continue : $this->plugin->getLogger()->info("Update cancelled!");
