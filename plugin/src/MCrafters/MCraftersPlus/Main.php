@@ -31,11 +31,12 @@ class Main extends PluginBase{
   
   public function onEnable(){
     $this->getLogger()->info("Enabling MCraftersPlus...");
+    @mkdir($this->getDataFolder());
     if($this->connectionTest() === true){
       $this->getServer()->getScheduler()->scheduleRepeatingTask(new QueryHandler($this, $this->getMCraftersPlugin()), (30 * 60 *20));
       $this->getLogger()->info("Successfully connected to the server.");
     }else{
-      $this->getLogger()->info("§cCould not connect to the server! Are you connected to the internet?");
+      $this->getLogger()->error("§cCould not connect to the server! Are you connected to the internet?");
     }
   }
   
