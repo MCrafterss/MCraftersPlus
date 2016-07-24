@@ -54,8 +54,9 @@ class Main extends PluginBase{
   }
   
   /**
-   * This will delete all file(s) and/or folders in $target path.
-   * Use it carefully!
+   * This function will delete file(s) and/or directories.
+   * This will even delete sub-directories,
+   * so use it carefully.
    */
   protected function force_delete($target){
     if(is_dir($target)){
