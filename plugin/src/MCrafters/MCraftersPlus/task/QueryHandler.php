@@ -41,13 +41,11 @@ class QueryHandler extends PluginTask{
     $parse = yaml_parse($url);
     if($parse["version"] !== ($plugin = $this->plugin->getServer()->getPluginManager()->getPlugin($this->name))->getDescription()->getVersion()){
       $this->plugin->getLogger()->info("\n------------------------\n§1M§9Crafters+ §5Auto Updater§f\nA new version of $name has been released! Do you want to update your current installed version " . $this->plugin->getServer()->getPluginManager()->getPlugin($name)->getDescription()->getVersion() . " to the new " . $parse["version"] . "?\n§7Update description:§f\n" . $parse["description"] . "\n(§ayes§f/§cno§f)");
-      if(strtolower($this->plugin->getInput("no")) === "yes") ? continue : $this->plugin->getLogger()->info("Update cancelled!");
+      if(strtolower($this->plugin->getInput("no"))) === "yes" ? : $this->plugin->getLogger()->info("Update cancelled!");
       $this->plugin->getLogger()->info("Disabling plugin...");
       $this->plugin->getServer()->getPluginManager()->disablePlugin($plugin);
-      $time = time() + (0* 0 * 3 * 0);
-      $this->plugin->getLogger()->info("Downloading plugin... Please wait until $time.");
+      $this->plugin->getLogger()->info("Downloading plugin... Please wait...");
       $this->plugin->getServer()->getScheduler()->scheduleAsyncTask(new DownloadHandler($parse["download"], $this->plugin->getDataFolder() . "/" . $this->name . ".phar"));
-      sleep(180);
       if(file_exists($this->plugin->getDataFolder() . "/" . $this->name . ".phar")){
         $this->plugin->getLogger()->info($this->name . " downloaded. Restarting plugin now...");
         $reflection = new \ReflectionClass("pocketmine\\plugin\\PluginBase");
