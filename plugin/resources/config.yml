@@ -11,3 +11,10 @@ start_exec: ""
 # waiting for an console permission.
 # Enter boolean (true or false)
 force_auto_update: true
+
+# The download time will be used when MCrafters+
+# is downloading an plugin. After this time (in seconds)
+# it'll check if the file was successfully downloaded.
+# If your server hasn't got an good connection speed is it
+# recommended to increase the value
+download_time: 180
