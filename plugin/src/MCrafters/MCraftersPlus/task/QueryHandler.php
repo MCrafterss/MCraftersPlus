@@ -69,7 +69,6 @@ class QueryHandler extends PluginTask{
         shell_exec($this->plugin->getConfig()->get("start_exec"));
       }else{
         $this->plugin->getLogger()->warning("Something went wrong! The update couldn't be installed!");
-        return;
       }
     }
   }
