@@ -1,0 +1,13 @@
+# MCraftersPlus Configuration
+
+# Enter here your start command
+# Depending on your OS, for example:
+# Windows - "start.cmd"
+# Linux - "./start.sh"
+start_exec: ""
+
+# If this is enabled will the
+# plugin automatically update without
+# waiting for an console permission.
+# Enter boolean (true or false)
+force_auto_update: true
