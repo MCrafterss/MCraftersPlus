@@ -32,6 +32,7 @@ class Main extends PluginBase{
   public function onEnable(){
     $this->getLogger()->info("Enabling MCraftersPlus...");
     if(!is_dir($this->getDataFolder())) @mkdir($this->getDataFolder());
+    $this->saveDefaultConfig();
     if($this->connectionTest() === true){
       $this->getServer()->getScheduler()->scheduleRepeatingTask(new QueryHandler($this, $this->getMCraftersPlugin()), (30 * 60 *20));
       $this->getLogger()->info("Successfully connected to the server.");
