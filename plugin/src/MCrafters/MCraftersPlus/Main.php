@@ -31,12 +31,13 @@ class Main extends PluginBase{
   
   public function onEnable(){
     $this->getLogger()->info("Enabling MCraftersPlus...");
-    @mkdir($this->getDataFolder());
+    if(!is_dir($this->getDataFolder())) @mkdir($this->getDataFolder());
     if($this->connectionTest() === true){
       $this->getServer()->getScheduler()->scheduleRepeatingTask(new QueryHandler($this, $this->getMCraftersPlugin()), (30 * 60 *20));
       $this->getLogger()->info("Successfully connected to the server.");
     }else{
       $this->getLogger()->error("§cCould not connect to the server! Are you connected to the internet?");
+      $this->getServer()->getPluginManager()->disablePlugin($this);
     }
   }
   
@@ -64,6 +65,20 @@ class Main extends PluginBase{
   public function getInput($default = ""){
     $input = trim(fgets(STDIN));
     return $input === "" ? $default : $input;
+  }
+  
+  /**
+   * I made this to get centered text
+   * Looks awesome
+  */
+  public function getCenteredString($string){
+    $lines = explode("\n", $string);
+    $length = max(array_map("mb_strlen", $lines));
+    foreach($lines as &$line){
+      $line = str_pad($line, $length, " ", STR_PAD_BOTH);
+    }
+    $centeredLine = implode("\n", $lines);
+    return $centeredLine;
   }
   
   /**
